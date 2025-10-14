@@ -99,19 +99,7 @@ enum CurveEditAction {
 		origin_at_curve_start = x
 		if x and curve:
 			rebase_curve_to_origin()
-	
 
-## This is a combination of Flags defined in the EditFlags enum and determines whether the user
-## can add and remove points and how constrained the movement of the off-curve control points
-## is.
-## ALLOW_ADD_REMOVE allows the creation and removal of on_curve control points.
-## ALLOW_MOVE_ENDPOINTS allows the endpoints to be moved.
-## CONSTRAIN_TO_BALANCED constrains off-curve control handles to be balanced (on the same line).
-## CONSTRAIN_TO_MIRRORED constrains off-curve control handles to mirror each other.
-@export var edit_flags : int = EditFlags.ALLOW_ADD_REMOVE + EditFlags.ALLOW_MOVE_ENDPOINTS:
-	set(x):
-		edit_flags = x
-		_set_toolbar_actions()
 
 ## The two "handles" (off-curve control points) of an on-curve control point 
 ## can be constrained to the same direction (BALANCED - this keeps edges from forming at
@@ -121,7 +109,20 @@ enum CurveEditAction {
 @export var control_handle_default: HandleType = HandleType.MIRRORED:
 	set(x):
 		control_handle_default = x
-		queue_redraw()
+		queue_redraw()	
+
+## This is a combination of Flags defined in the EditFlags enum and determines whether the user
+## can add and remove points and how constrained the movement of the off-curve control points
+## is.[br]
+## ALLOW_ADD_REMOVE allows the creation and removal of on_curve control points.[br]
+## ALLOW_MOVE_ENDPOINTS allows the endpoints to be moved.[br]
+## CONSTRAIN_TO_BALANCED constrains off-curve control handles to be balanced (on the same line).[br]
+## CONSTRAIN_TO_MIRRORED constrains off-curve control handles to mirror each other.[br]
+@export_flags("allow adding/removing points", "allow moving endpoints", "constrain to balanced", "constrain to mirrored") var edit_flags : int = EditFlags.ALLOW_ADD_REMOVE + EditFlags.ALLOW_MOVE_ENDPOINTS:
+	set(x):
+		edit_flags = x
+		_set_toolbar_actions()
+
 		
 @export var antialiasing: bool = true:
 	set(x):
