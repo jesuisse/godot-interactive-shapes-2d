@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://cces7q4wxhevx"]
+
+[ext_resource type="Script" uid="uid://bh8p771qs5cc7" path="res://addons/InteractiveShapes2D/demo.gd" id="1_pjlpo"]
+[ext_resource type="Script" uid="uid://cnrwvspqlk6in" path="res://addons/InteractiveShapes2D/interactive_curve_2d.gd" id="2_wdoki"]
+
+[sub_resource type="Curve2D" id="Curve2D_pjlpo"]
+_data = {
+"points": PackedVector2Array(0, 140, 0, -140, 0, 0, 0, -140, 0, 140, 200, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_d8w0p"]
+_data = {
+"points": PackedVector2Array(20, -150, -20, 150, 0, 0, 20, -150, -20, 150, 200, 0)
+}
+point_count = 2
+
+[node name="InteractiveCurvesDemo" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pjlpo")
+
+[node name="InteractiveCurveGold" type="Node2D" parent="."]
+position = Vector2(713, 337)
+script = ExtResource("2_wdoki")
+curve = SubResource("Curve2D_pjlpo")
+width = 20.0
+color = Color(0.859375, 0.6504444, 0.12614676, 1)
+control_points_color = Color(0.8429062, 0.8290103, 0.84375, 1)
+control_point_size = 7.6
+origin_at_curve_start = false
+metadata/_custom_type_script = "uid://cnrwvspqlk6in"
+
+[node name="InteractiveCurveBlue" type="Node2D" parent="."]
+position = Vector2(125, 225)
+script = ExtResource("2_wdoki")
+curve = SubResource("Curve2D_d8w0p")
+color = Color(0.11372549, 0.39607844, 0.8901961, 1)
+control_points_color = Color(0.55104125, 0.74717915, 0.8666667, 1)
+
+[node name="InteractiveCurveShared" type="Node2D" parent="."]
+position = Vector2(114, 525)
+script = ExtResource("2_wdoki")
+curve = SubResource("Curve2D_d8w0p")
+width = 1.0
+control_point_size = 4.0
