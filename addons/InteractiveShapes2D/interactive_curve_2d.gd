@@ -287,12 +287,10 @@ func _enforce_focused_constraint():
 	var base = curve.get_point_position(_focused_ctrl_idx)
 	var ctrl_in = curve.get_point_in(_focused_ctrl_idx)
 	var ctrl_out = curve.get_point_out(_focused_ctrl_idx)
-	print(_focused_ctrl_idx, " ", _focused_ctrl_position)
-	if is_focused_point(_focused_ctrl_idx, base+ctrl_in):
-		print("enforce in")
+	
+	if is_focused_point(_focused_ctrl_idx, base+ctrl_in):		
 		enforce_control_handle_constraints(_focused_ctrl_idx, ctrl_in)
-	elif is_focused_point(_focused_ctrl_idx, base+ctrl_out):
-		print("enforce out")
+	elif is_focused_point(_focused_ctrl_idx, base+ctrl_out):	
 		enforce_control_handle_constraints(_focused_ctrl_idx, ctrl_out)
 	
 
