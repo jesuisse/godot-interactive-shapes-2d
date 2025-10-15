@@ -29,6 +29,9 @@ extends Node2D
 		fill_color = x
 		queue_redraw()
 
+## This defines where the local coordinate origin lies in relation to the 
+## shape. (0.5, 0.5) means the origin is at it's center, while (0, 0) means
+## the origin sits at the top left corner and (1, 1) is at the bottom right.
 @export var origin_offset : Vector2 = Vector2(0.5, 0.5):
 	set(x):
 		origin_offset = x

@@ -105,6 +105,8 @@ func _handle_editor_input(event):
 					#_dragging_last_pos = to_local(event.position)
 					_dragging_last_pos = event.position
 					ctrl.ondrag.call(event, DragState.START, _dragging_last_pos)
+							
+				
 		if event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
 			if _is_dragging():
 				var ctrl = controls[_focused_ctrl_idx]

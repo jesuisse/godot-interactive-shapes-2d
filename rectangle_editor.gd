@@ -119,8 +119,8 @@ func _drag_ctrl_drag(event, _state, last_global_pos):
 func _resize_shape(posdelta : Vector2, sizedelta: Vector2) -> bool:
 	var minsize = _shape.get_minimum_size()
 	if sizedelta.x + _shape.size.x > minsize.x and sizedelta.y + _shape.size.y > minsize.y:	
-		_shape.position += posdelta
-		_shape.size += sizedelta		
+		_shape.position += _shape.transform.basis_xform(posdelta)
+		_shape.size += sizedelta
 		_shape.queue_redraw() # most likely unnecessary, but let's err on the side of caution
 		_calculate_control_positions()
 		queue_redraw()
@@ -130,31 +130,31 @@ func _resize_shape(posdelta : Vector2, sizedelta: Vector2) -> bool:
 		return false
 
 
-# called when the right top corner ctrl is dragged
-func _corner_ctrl_drag0(event, _state, last_global_pos) -> bool:
-	var deltapos : Vector2 = event.position - last_global_pos	
+# called when the left top corner ctrl is dragged
+func _corner_ctrl_drag0(event, _state, last_global_pos) -> bool:	
+	var deltapos : Vector2 = to_local(event.position) - to_local(last_global_pos)
 	var diff = Vector2((1 - _shape.origin_offset.x) * deltapos.x, (1-_shape.origin_offset.y) * deltapos.y)
 	return _resize_shape(diff, -deltapos)
 
 
 # called when the right top corner ctrl is dragged
-func _corner_ctrl_drag1(event, _state, last_global_pos):
-	var deltapos : Vector2 = event.position - last_global_pos	
+func _corner_ctrl_drag1(event, _state, last_global_pos):	
+	var deltapos : Vector2 = to_local(event.position) - to_local(last_global_pos)
 	var sizedelta = Vector2(deltapos.x, -deltapos.y)		
 	var diff = Vector2(sizedelta.x * _shape.origin_offset.x, sizedelta.y * _shape.origin_offset.y + deltapos.y)
 	return _resize_shape(diff, sizedelta)
 
 	
 # called when the left bottom ctrl is dragged
-func _corner_ctrl_drag2(event, _state, last_global_pos):
-	var deltapos : Vector2 = event.position - last_global_pos
+func _corner_ctrl_drag2(event, _state, last_global_pos):	
+	var deltapos : Vector2 = to_local(event.position) - to_local(last_global_pos)
 	var sizedelta = Vector2(-deltapos.x, deltapos.y)
 	var diff = Vector2(sizedelta.x * _shape.origin_offset.x + deltapos.x, sizedelta.y * _shape.origin_offset.y)
 	return _resize_shape(diff, sizedelta)
 
 # called when the right bottom ctrl is dragged
-func _corner_ctrl_drag3(event, _state, last_global_pos):
-	var deltapos : Vector2 = event.position - last_global_pos
+func _corner_ctrl_drag3(event, _state, last_global_pos):	
+	var deltapos : Vector2 = to_local(event.position) - to_local(last_global_pos)
 	var diff = Vector2(deltapos.x * _shape.origin_offset.x, deltapos.y * _shape.origin_offset.y)
 	return _resize_shape(diff, deltapos)
 		
