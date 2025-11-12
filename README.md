@@ -2,7 +2,7 @@ Interactive Shape Drawing for Godot
 ===================================
 
 This is an addon for the Godot Game Engine. It should work with all
-versions >= 4.0.
+versions >= 4.0, but it is a **work in progress** and not ready for production. 
 
 The addon provides the InteractiveCurve2D node. Once you've copied the addon to
 your project, you should find a new InteractiveCurve2D node in the editor's
